@@ -17,17 +17,17 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Objects
-const geometry = new THREE.SphereGeometry( 1.2, 150, 20 );
+const geometry = new THREE.SphereGeometry( 1, 150, 80 );
 
 const particlesGeometry = new THREE.BufferGeometry;
-const particlesCount = 14000;
+const particlesCount = 15000;
 
 const positionArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
     // positionArray[i] = Math.random();
     // positionArray[i] = Math.random() - 0.5
-    positionArray[i] = (Math.random() - 0.5) * (Math.random() * 9)
+    positionArray[i] = (Math.random() - 0.5) * (Math.random() * 1.5)
 }
 
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
@@ -41,7 +41,7 @@ const particlesMaterial = new THREE.PointsMaterial({
     size: 0.011,
     map: arrow,
     transparent: true,
-    color: '#ff3500'
+    color: '#ff0f00'
 })
 
 
@@ -103,7 +103,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor(new THREE.Color('#63787e'), .7)
+renderer.setClearColor(new THREE.Color('#8c8c8c'), .7)
 
 /**
  * Animate
