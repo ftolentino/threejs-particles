@@ -27,7 +27,7 @@ const positionArray = new Float32Array(particlesCount * 3);
 for(let i = 0; i < particlesCount * 3; i++) {
     // positionArray[i] = Math.random();
     // positionArray[i] = Math.random() - 0.5
-    positionArray[i] = (Math.random() - 0.5) * (Math.random() * 1.5)
+    positionArray[i] = (Math.random() - 0.5) * (Math.random() * 7) * (Math.random() / 3)
 }
 
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
@@ -105,6 +105,17 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor(new THREE.Color('#8c8c8c'), .7)
 
+// Mouse Movement
+
+document.addEventListener('mousemove', animateParticles)
+
+let mouseX = 0;
+let mouseY = 0
+
+function animateParticles(event) {
+    mouseY = event.clientY
+    mouseX = event.clientX
+}
 /**
  * Animate
  */
@@ -118,7 +129,12 @@ const tick = () =>
 
     // Update objects
     sphere.rotation.y = .15 * elapsedTime
+    particlesMesh.rotation.y = -.1 * elapsedTime
 
+    if (mouseX > 0) {
+        particlesMesh.rotation.x = -mouseY * (elapsedTime * -0.00030)
+        particlesMesh.rotation.Y = mouseX * (elapsedTime * 0.00030)
+    }
     // Update Orbital Controls
     controls.update()
 
